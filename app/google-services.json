@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "599528932566",
+    "firebase_url": "https://atencioncorilla.firebaseio.com",
+    "project_id": "atencioncorilla",
+    "storage_bucket": "atencioncorilla.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599528932566:android:8008ca6fb2cb522f",
+        "android_client_info": {
+          "package_name": "david.ramirez2.upr.edu.atencioncorilla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599528932566-sv88r077l0a893sl864f4dfiqf7kr1jq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "david.ramirez2.upr.edu.atencioncorilla",
+            "certificate_hash": "7fa0d672ed148e079f9ed395f828d369ae35372f"
+          }
+        },
+        {
+          "client_id": "599528932566-l0k4ni9b96nuhqhq2o85qigc4p5incim.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8X0V3CX70-hiateTsf02Q35c0xTq-kl8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599528932566-l0k4ni9b96nuhqhq2o85qigc4p5incim.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
