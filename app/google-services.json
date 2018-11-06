@@ -42,6 +42,13 @@
             {
               "client_id": "599528932566-l0k4ni9b96nuhqhq2o85qigc4p5incim.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "599528932566-pppjmkudnjcvle5sm692bbetj1kq16s1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "MariaRamos.Atencion-Corilla-iOS"
+              }
             }
           ]
         },
