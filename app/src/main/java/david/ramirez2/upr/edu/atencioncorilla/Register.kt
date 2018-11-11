@@ -41,7 +41,7 @@ class Register : AppCompatActivity() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
-
+                        saveUserToFirebaseDatabase()
                     // else if successful
                     Log.d("Register",  "Successfully created user with uid: ${it.result.user.uid}")
                 }
