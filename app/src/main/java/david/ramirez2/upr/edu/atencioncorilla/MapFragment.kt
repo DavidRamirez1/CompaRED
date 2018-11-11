@@ -14,7 +14,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
+import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -23,8 +26,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.location.LocationServices
-
-
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,16 +34,17 @@ import com.google.android.gms.location.LocationServices
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-private lateinit var mMap: GoogleMap
-private lateinit var fusedLocationClient: FusedLocationProviderClient
-private lateinit var lastLocation: Location
-private lateinit var nav: NavigationActivity
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 class MapFragment : Fragment(), OnMapReadyCallback{
+
+    private lateinit var mMap: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var lastLocation: Location
+    private lateinit var nav: NavigationActivity
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -60,6 +63,7 @@ class MapFragment : Fragment(), OnMapReadyCallback{
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -68,22 +72,84 @@ class MapFragment : Fragment(), OnMapReadyCallback{
         mMap = googleMap
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
+
         mMap.setOnMapClickListener { point: LatLng ->
 
+            val vr = layoutInflater.inflate(R.layout.pin_category_spinner, null )
+            val mSpinner = vr!!.findViewById<Spinner>(R.id.spinner)
             val dialog = AlertDialog.Builder(v!!.context)
-            val input = EditText(v.context)
-            input.inputType = InputType.TYPE_CLASS_TEXT
-            dialog.setView(input)
+            // dialog.setView(R.layout.pin_category_spinner)
+            //     val p_categories = arrayOf("Category 1", "Category 2", "Category 3", "Category 4")
+            //    dialog.setItems(p_categories, {dialog2, which ->
+            //        switch(which)
 
+            //    })
+            //   })
+
+            // })
+            //dialog.setItems(p_categories, dialog.setOnItemSelectedListener
+            //})
+
+            val adapter = ArrayAdapter<String>(v.context, android.R.layout.simple_spinner_item, resources.getStringArray(R.array.pincategoryList))
+            //    p_categories) // or resources.getStringArray(R.array.pincategoryList)
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            mSpinner.adapter = adapter
+
+            //        val input = EditText(v!!.context)
+            //          input.inputType = InputType.TYPE_CLASS_TEXT
+//            dialog.setView(input)
+
+            dialog.setTitle("Confirm Report")
+                    .setMessage("Confirm!")
+                    .setPositiveButton("OK") { dialog, i ->
+                        //   val description = input.text.toString()
+                        // if(!mSpinner.selectedItem.toString().equals(""))
+                        //mMap.addMarker(MarkerOptions().position(point).title(description))
+                        if(!mSpinner.selectedItem.toString().equals("Escoja el tipo de reporte...")) {
+                            val description = mSpinner.selectedItem.toString()
+                            if(description == "Category 1")
+                                mMap.addMarker(MarkerOptions().position(point).title(description))
+                            else if(description == "Category 2") {
+                                mMap.addMarker(MarkerOptions()
+                                        .position(point)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                                        .title(description))
+                            }
+                            else if(description == "Category 3"){
+                                mMap.addMarker(MarkerOptions()
+                                        .position(point)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+                                        .title(description))
+                            }
+                            else if(description == "Category 4"){
+                                mMap.addMarker(MarkerOptions()
+                                        .position(point)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                                        .title(description))
+                            }
+                            // mMap.addMarker(MarkerOptions().position(point).title(description))
+                            Toast.makeText(activity, "El reporte se ha a~adido al mapa.", Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+                            Toast.makeText(activity, "Por favor escoja una categoria para reportar!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .setNegativeButton("Cancel") { dialog, which ->
+                    }
+/*
             dialog.setTitle("Confirm Report")
                     .setMessage("Confirm!")
                     .setPositiveButton("OK", { dialog, i ->
                         val description = input.text.toString()
+                        // if(!mSpinner.selectedItem.toString().equals(""))
                         mMap.addMarker(MarkerOptions().position(point).title(description))
                     })
                     .setNegativeButton("Cancel", { dialog, which ->
-                    })
+                    })*/
 
+            dialog.setView(vr)
             dialog.show()
         }
 
@@ -137,6 +203,14 @@ class MapFragment : Fragment(), OnMapReadyCallback{
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12.0f))
            */
 
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            if (location != null) {
+                lastLocation = location
+                val currentLatLng = LatLng(location.latitude, location.longitude)
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12.0f))
+            }
+        }
+
      //   fusedLocationClient.lastLocation.
 
                 /*.addOnSuccessListener{ location ->
@@ -150,14 +224,14 @@ class MapFragment : Fragment(), OnMapReadyCallback{
         }*/
 
           //mMap.addMarker(MarkerOptions().position(18.46333, -66.105721))
-
+ /*
           // Add a marker in Sydney and move the camera
           val sydney = LatLng(18.46333, -66.105721)
           mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
           val sydney2 = LatLng(19.46333, -65.105721)
           mMap.addMarker(MarkerOptions().position(sydney2).title("Marker in Sydney"))
 
-         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12.0f))
+         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 12.0f))*/
     }
 
     fun reportPin(view: View) {

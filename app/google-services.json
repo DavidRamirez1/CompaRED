@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "599528932566-4jmo3unqto8o9i3ulqc54iujsfb9dq1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "david.ramirez2.upr.edu.atencioncorilla",
+            "certificate_hash": "25ded14cc52ea4fef9a17e7a3488ce37275566a0"
+          }
+        },
+        {
           "client_id": "599528932566-l0k4ni9b96nuhqhq2o85qigc4p5incim.apps.googleusercontent.com",
           "client_type": 3
         }
