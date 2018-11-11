@@ -11,6 +11,14 @@
     <string name="title_activity_login">login</string>
     <string name="title_activity_register">Register</string>
 
+    <string-array name="pincategoryList">
+        <item>Escoja el tipo de reporte...</item>
+        <item>Category 1</item>
+        <item>Category 2</item>
+        <item>Category 3</item>
+        <item>Category 4</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     </resources>
