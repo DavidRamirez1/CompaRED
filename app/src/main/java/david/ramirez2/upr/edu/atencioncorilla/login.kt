@@ -32,9 +32,10 @@ class Login: AppCompatActivity() {
         val password = password_edittext_login.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please fill out email anf password.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Por favor llenar toda la informacion requerida.", Toast.LENGTH_SHORT).show()
             return
         }
+
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
@@ -44,8 +45,7 @@ class Login: AppCompatActivity() {
                     Log.d("Login", "Successfully logged in: ${it.result.user.uid}")
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Failed to log in: ${it.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error al iniciar sesión: ${it.message}", Toast.LENGTH_SHORT).show()
                 }
     }
-
 }

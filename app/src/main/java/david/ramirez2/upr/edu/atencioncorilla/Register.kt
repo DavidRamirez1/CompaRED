@@ -6,6 +6,9 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_register.*
 
 class Register : AppCompatActivity() {
@@ -28,9 +31,10 @@ class Register : AppCompatActivity() {
     private fun performRegister() {
         val email = email_edittext_register.text.toString()
         val password = password_edittext_register.text.toString()
+        val username = username_edittext_register.text.toString()
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please enter text in all fields", Toast.LENGTH_SHORT).show()
+        if (email.isEmpty() || password.isEmpty() || username.isEmpty()) {
+            Toast.makeText(this, "Por favor llenar toda la informacion requerida.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -47,25 +51,30 @@ class Register : AppCompatActivity() {
                 }
                 .addOnFailureListener{
                     Log.d("Register",  "Failed to create user: ${it.message}")
-                    Toast.makeText(this, "Failed to create user: ${it.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error al crear usuario: ${it.message}", Toast.LENGTH_SHORT).show()
                 }
     }
 
     private fun saveUserToFirebaseDatabase() {
-        val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val id = FirebaseAuth.getInstance().uid ?: ""
+        val username = username_edittext_register.text.toString()
+        val email = email_edittext_register.text.toString()
 
-        val user = User(uid, username_edittext_register.text.toString())
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$username")
 
-        ref.setValue(user)
-                .addOnSuccessListener {
-                    Log.d("Register",  "Finally we saved the user to Firebase Database")
-                }
-                .addOnFailureListener {
-                    Log.d("Register",  "Failed to set value to database: ${it.message}")
-                }
+                    val user = User(id, email)
+                    ref.setValue(user)
+                            .addOnSuccessListener {
+
+                                Log.d("Register", "Finally we saved the user to Firebase Database")
+                                finish()
+                            }
+                            .addOnFailureListener {
+                                Log.d("Register", "Failed to set value to database: ${it.message}")
+                            }
+
+
     }
-
 }
 
-class User(val uid: String, val username: String)
+class User(val uid: String, val email: String)
