@@ -13,9 +13,17 @@
 
     <string-array name="pincategoryList">
         <item>Escoja el tipo de reporte...</item>
-        <item>Category 1</item>
-        <item>Category 2</item>
-        <item>Category 3</item>
+        <item>Acoso</item>
+        <item>Asalto</item>
+        <item>Violacion</item>
+        <item>Category 4</item>
+    </string-array>
+
+    <string-array name="filterList">
+        <item>Todos</item>
+        <item>Acoso</item>
+        <item>Asalto</item>
+        <item>Violacion</item>
         <item>Category 4</item>
     </string-array>
 

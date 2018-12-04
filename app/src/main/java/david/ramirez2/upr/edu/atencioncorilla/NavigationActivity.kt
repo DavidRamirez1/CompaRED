@@ -105,4 +105,6 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+
 }
