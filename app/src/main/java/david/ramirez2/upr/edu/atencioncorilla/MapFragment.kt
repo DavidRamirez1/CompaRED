@@ -35,7 +35,7 @@ import javax.xml.datatype.DatatypeConstants.MONTHS
 
 
 
-// TODO: Rename parameter arguments, choose names that match
+// Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -534,7 +534,7 @@ class MapFragment : Fragment(), OnMapReadyCallback{
                             + " | " + PinHour + ":" + PinMinute))
         }
 
-        else if(PinCategory == "Category 4"){
+        else if(PinCategory == "Otro"){
 
             // Local addition of marker
 

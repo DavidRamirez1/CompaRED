@@ -1,5 +1,6 @@
 package david.ramirez2.upr.edu.atencioncorilla
 
+import android.provider.ContactsContract
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,40 +13,66 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DataSnapshot
 
 
-import david.ramirez2.upr.edu.atencioncorilla.ItemFragment.OnListFragmentInteractionListener
-import david.ramirez2.upr.edu.atencioncorilla.dummy.DummyContent.DummyItem
-
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
  * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
+ *  Replace the implementation with code for your data type.
  */
-
+private val contactlist: MutableList<String> = mutableListOf()
 data class Compas(
         var value: Boolean? = null,
-        val uid: String = ""){    constructor() : this(null, "")  }
+        val user: String = ""){ constructor() : this(null, "")  }
 
 private fun fetchCurrentUser() {
-    val uid = FirebaseAuth.getInstance().uid
-    val ref = FirebaseDatabase.getInstance().getReference("/contacts/$uid")
+    val CurrentUser = FirebaseAuth.getInstance().currentUser
+    val ref = FirebaseDatabase.getInstance().getReference("/contacts/$CurrentUser")
+    ref.addValueEventListener(object: ValueEventListener {
+        override fun onCancelled(p0: DatabaseError) {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
 
-    c
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val contact =dataSnapshot.children
+            contact.forEach{
+                val contactData = it.getValue(Compas::class.java)!!
+
+                val CompaUser = contactData.user
+                val Bool = contactData.value
+
+                if(Bool!!) {
+                    contactlist.add(CompaUser)
+                }
+
+            }
+        }
+    })
+}
+
+class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
+    override fun onBindViewHolder(p0: CustomViewHolder, p1: Int) {
+        val compa = contactlist.get(p1)
+        p0?.view?.ContactName?.text = compa
+    }
+
+    // numberOfItems
+    override fun getItemCount(): Int {
+        fetchCurrentUser()
+        return contactlist.size
+    }
+
+   override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): CustomViewHolder {
+        // how do we even create a view
+        val layoutInflater = LayoutInflater.from(p0?.context)
+        val cellForRow = layoutInflater.inflate(R.layout.fragment_item_list, p0, false)
+        return CustomViewHolder(cellForRow)
+    }
+
 
 
 }
 
+class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view) {
 
-class MyAdapter : RecyclerView.Adapter() {
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-    }
-    f    override fun getItemCount(): Int {
-    }
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

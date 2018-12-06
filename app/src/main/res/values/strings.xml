@@ -16,7 +16,7 @@
         <item>Acoso</item>
         <item>Asalto</item>
         <item>Violacion</item>
-        <item>Category 4</item>
+        <item>Otro</item>
     </string-array>
 
     <string-array name="filterList">
@@ -24,10 +24,10 @@
         <item>Acoso</item>
         <item>Asalto</item>
         <item>Violacion</item>
-        <item>Category 4</item>
+        <item>Otro</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
@@ -119,4 +119,5 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="compared">CompaRED</string>
 </resources>

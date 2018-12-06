@@ -68,15 +68,15 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        when (item.itemId) {
+//            R.id.action_settings -> return true
+//            else -> return super.onOptionsItemSelected(item)
+//        }
+//    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
@@ -89,28 +89,28 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 manager.beginTransaction().replace(R.id.mainLayout, mapFragment).commit()
 
             }
-            R.id.nav_gallery -> {
+            R.id.nav_requests-> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_messages-> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, Login::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
 
             }
-            R.id.nav_share -> {
-                val compas = MyItemRecyclerViewAdapter()
+            R.id.nav_contacts -> {
+                val compas = ItemFragment()
                 val manager = supportFragmentManager
                 manager.beginTransaction().replace(R.id.mainLayout, compas).commit()
 
 
 
             }
-            R.id.nav_send -> {
+            R.id.nav_panic-> {
 
             }
         }
