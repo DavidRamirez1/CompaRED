@@ -13,9 +13,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/compared"
         android:label="CompaRED"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/compared"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -38,9 +38,7 @@
 
         <activity
             android:name=".MapsInterface"
-            android:label="@string/title_activity_maps_interface">
-
-        </activity>
+            android:label="@string/title_activity_maps_interface" />
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
@@ -54,12 +52,10 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NavigationActivity"
-            android:label="Atencion Corilla"
+            android:label="CompaRED"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

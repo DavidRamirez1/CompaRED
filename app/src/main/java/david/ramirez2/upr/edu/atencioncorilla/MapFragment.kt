@@ -160,7 +160,7 @@ class MapFragment : Fragment(), OnMapReadyCallback{
                   //  Log.d("Hmm", "Category " + pinList[0].Category )
                 //}
                 Log.d("Count", "The count is " + dataSnapshot.childrenCount)
-                Log.d("Value", "Test: ${dataSnapshot.value}")
+                Log.d("Value", "Test ${dataSnapshot.value}")
 
                 val pin = dataSnapshot.children
 

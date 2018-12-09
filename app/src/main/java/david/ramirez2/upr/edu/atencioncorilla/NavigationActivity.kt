@@ -37,6 +37,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         val mapFragment = MapFragment()
         val manager = supportFragmentManager
         manager.beginTransaction().replace(R.id.mainLayout, mapFragment).commit()
+        fetchCurrentUser()
 
         //val mapsInterface: MapsInterface
 

@@ -120,4 +120,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="compared">CompaRED</string>
+    <string name="title_activity_compas">Compas</string>
 </resources>
