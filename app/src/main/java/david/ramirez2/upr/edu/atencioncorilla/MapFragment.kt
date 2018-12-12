@@ -147,21 +147,6 @@ class MapFragment : Fragment(), OnMapReadyCallback{
 
                 // Loads every Pin
 
-               // pinList.clear()
-
-               // val pin = dataSnapshot.getValue(Pins::class.java)
-             //   Log.d("Msg222", "HeyoHeyo " + pin!!.Category)
-             //   pinList.add(pin)
-
-                //dataSnapshot.children.mapNotNullTo(pinList){
-                 //   Log.d("Size2", "We in here?")
-
-                    //dataSnapshot.value<Pins>(Pins::class.java)
-                  //  Log.d("Hmm", "Category " + pinList[0].Category )
-                //}
-                Log.d("Count", "The count is " + dataSnapshot.childrenCount)
-                Log.d("Value", "Test ${dataSnapshot.value}")
-
                 val pin = dataSnapshot.children
 
                 pin.forEach{
@@ -279,6 +264,10 @@ class MapFragment : Fragment(), OnMapReadyCallback{
 
                 val dialogDate = DatePickerDialog(context!!, mDateListener, year, month, day)
                 val dialogTime = TimePickerDialog(context, mTimeListener, hour, minute, android.text.format.DateFormat.is24HourFormat(context))
+
+                // Time is used in 24 hour format
+                // android.text.format.DateFormat.is24HourFormat(context) Could be used to check if the 24 hour format is being used
+                // in the user's cellphone, but we are defaulting to the 24 Hour Format for simplicities sake
 
                 // Callback for when user clicks "OK" in Date dialog
 
@@ -437,10 +426,10 @@ class MapFragment : Fragment(), OnMapReadyCallback{
 
             addHeatMap()
             if(!isHeatMapOn){
-            Toast.makeText(activity, "Filtro de Calor de Mapa", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Filtro de Pines", Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(activity, "Filtro de Pines", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Filtro de Calor de Mapa", Toast.LENGTH_SHORT).show()
             }
         }
 
