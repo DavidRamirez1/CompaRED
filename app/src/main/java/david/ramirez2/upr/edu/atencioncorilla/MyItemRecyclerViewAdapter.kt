@@ -70,7 +70,7 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
         Log.d("Test", "compa:${contactlist.get(p1)}")
 
         val compa = contactlist.get(p1)
-        p0?.view?.ContactName?.text = compa
+        p0.view.ContactName.text = compa
     }
 
     // numberOfItems
@@ -85,8 +85,6 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
         val cellForRow = layoutInflater.inflate(R.layout.fragment_item, p0, false)
         return CustomViewHolder(cellForRow)
     }
-
-
 
 }
 

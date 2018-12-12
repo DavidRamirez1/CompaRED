@@ -26,7 +26,6 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        verifyUserIsLoggedIn()
 
       /*  if (ActivityCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -91,6 +90,9 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
             }
             R.id.nav_requests-> {
+                val solicitudes = SolicitudesFragment()
+                val manager = supportFragmentManager
+                manager.beginTransaction().replace(R.id.mainLayout, solicitudes).commit()
 
             }
             R.id.nav_messages-> {
@@ -119,12 +121,5 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
-    private fun verifyUserIsLoggedIn() {
-        val uid = FirebaseAuth.getInstance().uid
-        if (uid == null) {
-            val intent = Intent(this, Login::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
-    }
+
 }

@@ -17,23 +17,21 @@ import android.widget.ListView
 import david.ramirez2.upr.edu.atencioncorilla.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
-data class Contact(val contact: String) {
-    override fun toString(): String = contact
-}
+
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
  * [ItemFragment.OnListFragmentInteractionListener] interface.
  */
-class ItemFragment : Fragment() {
+class SolicitudesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        Log.d("Test", "From Fragment:$contactlist")
+        Log.d("Test", "From Solicitudes:$contactlist")
 
-        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
-        view.findViewById<RecyclerView>(R.id.listrecycleview).adapter = MainAdapter()
+        val view = inflater.inflate(R.layout.fragment_solicitudes_list, container, false)
+        view.findViewById<RecyclerView>(R.id.solicitudrecycleview).adapter = MainAdapter2()
 
         // Added in Sprint 4
 
@@ -53,7 +51,6 @@ class ItemFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: Contact)
     }
 
 }

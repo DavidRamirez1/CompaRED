@@ -17,6 +17,8 @@ class Login: AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        verifyUserIsLoggedIn()
+
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
@@ -62,5 +64,15 @@ class Login: AppCompatActivity() {
                 .addOnFailureListener {
                     Toast.makeText(this, "Error al iniciar sesión: ${it.message}", Toast.LENGTH_SHORT).show()
                 }
+    }
+    private fun verifyUserIsLoggedIn() {
+        val userid = FirebaseAuth.getInstance().uid
+        Log.d("Login", "$userid")
+
+        if (userid != null) {
+            val intent = Intent(this, NavigationActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 }

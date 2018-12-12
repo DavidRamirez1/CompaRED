@@ -6,25 +6,26 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/ContactName"
+        android:id="@+id/solicitante"
         android:layout_width="183dp"
         android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="monospace"
-        android:text="@string/contact_name"
+        android:text="@string/solicitud"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.037"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="5dp" />
+        tools:ignore="MissingConstraints" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/deleteContact"
+        android:id="@+id/deleteRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -37,26 +38,27 @@
         app:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.328"
-        app:layout_constraintStart_toEndOf="@+id/sendMessage"
+        app:layout_constraintStart_toEndOf="@+id/AddContact"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_delete"
         tools:ignore="MissingConstraints" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/sendMessage"
+        android:id="@+id/AddContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="1dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/design_default_color_primary_dark"
+        app:backgroundTint="@android:color/background_light"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ContactName"
-        app:srcCompat="@android:drawable/sym_action_email"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="4dp" />
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toEndOf="@+id/solicitante"
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

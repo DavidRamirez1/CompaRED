@@ -121,4 +121,6 @@
     </string>
     <string name="compared">CompaRED</string>
     <string name="title_activity_compas">Compas</string>
+    <string name="contact_name">Contact Name</string>
+    <string name="solicitud">Solicitud</string>
 </resources>
