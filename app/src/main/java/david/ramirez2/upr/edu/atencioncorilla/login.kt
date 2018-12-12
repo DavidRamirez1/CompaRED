@@ -26,6 +26,7 @@ class Login: AppCompatActivity() {
         login_button_login.setOnClickListener {
             performLogin()
 
+            
         }
 
         back_to_register_textview.setOnClickListener{
