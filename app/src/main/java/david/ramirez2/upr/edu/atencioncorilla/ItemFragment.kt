@@ -13,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 import david.ramirez2.upr.edu.atencioncorilla.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.fragment_item.view.*
@@ -26,7 +28,6 @@ data class Contact(val contact: String) {
  * [ItemFragment.OnListFragmentInteractionListener] interface.
  */
 class ItemFragment : Fragment() {
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -36,6 +37,7 @@ class ItemFragment : Fragment() {
         view.findViewById<RecyclerView>(R.id.listrecycleview).adapter = MainAdapter()
 
         // Added in Sprint 4
+
 
         return view
 

@@ -37,6 +37,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         val manager = supportFragmentManager
         manager.beginTransaction().replace(R.id.mainLayout, mapFragment).commit()
         fetchCurrentUser()
+        fetchRequests()
 
         //val mapsInterface: MapsInterface
 
@@ -83,7 +84,8 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         when (item.itemId) {
             R.id.nav_map -> {
                 // Handle the camera action
-
+                fetchRequests()
+                fetchCurrentUser()
                 val mapFragment = MapFragment()
                 val manager = supportFragmentManager
                 manager.beginTransaction().replace(R.id.mainLayout, mapFragment).commit()

@@ -1,11 +1,13 @@
 package david.ramirez2.upr.edu.atencioncorilla
 
 import android.provider.ContactsContract
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -15,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 
 
 import kotlinx.android.synthetic.main.fragment_item.view.*
+import kotlinx.android.synthetic.main.fragment_solicitudes.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -66,6 +69,8 @@ fun fetchCurrentUser(){
 }
 
 class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
+    private lateinit var deletecontact : FloatingActionButton
+
     override fun onBindViewHolder(p0: CustomViewHolder, p1: Int) {
         Log.d("Test", "compa:${contactlist.get(p1)}")
 
@@ -83,6 +88,18 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
    override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(p0?.context)
         val cellForRow = layoutInflater.inflate(R.layout.fragment_item, p0, false)
+
+
+        deletecontact = cellForRow.findViewById(R.id.deleteContact)
+        deletecontact.setOnClickListener{
+            val CurrentUser = FirebaseAuth.getInstance().currentUser
+            val ref = FirebaseDatabase.getInstance().getReference("/contacts/${CurrentUser!!.getDisplayName()}")
+            val contact = cellForRow.ContactName.text
+            ref.child("$contact").removeValue()
+            fetchCurrentUser()
+        }
+
+
         return CustomViewHolder(cellForRow)
     }
 
