@@ -1,5 +1,6 @@
 package david.ramirez2.upr.edu.atencioncorilla
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -9,18 +10,39 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.InputType
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.Toast
 import com.google.android.gms.dynamic.SupportFragmentWrapper
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.maps.model.LatLng
+
 import com.google.firebase.database.FirebaseDatabase
 
+var message: String = ""
+fun sendGroupMSG() {
+
+    val CurrentUser = FirebaseAuth.getInstance().currentUser
+    var username = CurrentUser!!.getDisplayName()
+    for(x in contactlist){
+        val ref = FirebaseDatabase.getInstance().getReference("/mensajes/$x")
+        ref.child("${ref.push().key}").setValue("$username:$message")
+
+    }
+    message = ""
+
+}
 class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +62,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         fetchCurrentUser()
         fetchRequests()
         fetchMessages()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         //val mapsInterface: MapsInterface
 
@@ -80,7 +103,8 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 //            else -> return super.onOptionsItemSelected(item)
 //        }
 //    }
-
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    @SuppressLint("MissingPermission")
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
@@ -108,7 +132,25 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
             }
             R.id.nav_escribir-> {
-                Toast.makeText(this, "COSO", Toast.LENGTH_SHORT).show()
+                val dialog = AlertDialog.Builder(this)
+                val input = EditText(this)
+                input.setSingleLine(false)
+                input.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
+                input.setLines(3)
+                input.setMaxLines(6)
+                input.setGravity(Gravity.START)
+                dialog.setView(input)
+
+                dialog.setTitle("Escriba su mensaje")
+                        .setMessage("Enviar!")
+                        .setPositiveButton("OK") { dialog, i ->
+                            message = input.text.toString()
+                            sendGroupMSG()
+                        }
+                        .setNegativeButton("Cancelar") { dialog, which ->
+                        }
+                dialog.show()
+
 
             }
             R.id.nav_logout -> {
@@ -127,7 +169,22 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
             }
             R.id.nav_panic-> {
-                
+
+                fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    val CurrentUser = FirebaseAuth.getInstance().currentUser
+                    var username = CurrentUser!!.getDisplayName()
+                    val message = "$username: PÁNICO! @ $currentLatLng"
+                    for(x in contactlist){
+                        val ref = FirebaseDatabase.getInstance().getReference("/mensajes/$x")
+                        ref.child("${ref.push().key}").setValue(message)
+
+                    }
+
+                }
+            }
+
 
             }
         }
