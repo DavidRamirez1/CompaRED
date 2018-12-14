@@ -125,4 +125,6 @@
     <string name="solicitud">Solicitud</string>
     <string name="usuario_a_a_adir">Usuario a añadir</string>
     <string name="a_adir">Añadir</string>
+    <string name="mensajes">Mensajes</string>
+    <string name="escribir">Escribir</string>
 </resources>

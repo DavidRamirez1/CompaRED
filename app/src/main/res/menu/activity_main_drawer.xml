@@ -17,9 +17,13 @@
             android:icon="@android:drawable/ic_menu_help"
             android:title="Solicitudes" />
         <item
+            android:id="@+id/nav_escribir"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/escribir" />
+        <item
             android:id="@+id/nav_messages"
             android:icon="@android:drawable/ic_dialog_email"
-            android:title="Mensajes" />
+            android:title="@string/mensajes" />
 
         <item
             android:id="@+id/nav_logout"

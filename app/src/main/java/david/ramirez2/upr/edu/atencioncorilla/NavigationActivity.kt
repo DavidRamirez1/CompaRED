@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -38,6 +39,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         manager.beginTransaction().replace(R.id.mainLayout, mapFragment).commit()
         fetchCurrentUser()
         fetchRequests()
+        fetchMessages()
 
         //val mapsInterface: MapsInterface
 
@@ -86,6 +88,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 // Handle the camera action
                 fetchRequests()
                 fetchCurrentUser()
+                fetchMessages()
                 val mapFragment = MapFragment()
                 val manager = supportFragmentManager
                 manager.beginTransaction().replace(R.id.mainLayout, mapFragment).commit()
@@ -98,6 +101,14 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
             }
             R.id.nav_messages-> {
+                val msgs = MessagesFragment()
+                val manager = supportFragmentManager
+                manager.beginTransaction().replace(R.id.mainLayout, msgs).commit()
+
+
+            }
+            R.id.nav_escribir-> {
+                Toast.makeText(this, "COSO", Toast.LENGTH_SHORT).show()
 
             }
             R.id.nav_logout -> {
@@ -116,6 +127,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
             }
             R.id.nav_panic-> {
+                
 
             }
         }

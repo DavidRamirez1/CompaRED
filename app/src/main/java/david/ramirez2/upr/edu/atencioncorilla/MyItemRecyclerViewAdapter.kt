@@ -70,6 +70,7 @@ fun fetchCurrentUser(){
 
 class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
     private lateinit var deletecontact : FloatingActionButton
+    private lateinit var sendmessage : FloatingActionButton
 
     override fun onBindViewHolder(p0: CustomViewHolder, p1: Int) {
         Log.d("Test", "compa:${contactlist.get(p1)}")
@@ -99,6 +100,25 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder>() {
             fetchCurrentUser()
         }
 
+       sendmessage = cellForRow.findViewById(R.id.sendMessage)
+
+       sendmessage.setOnClickListener{
+           val CurrentUser = FirebaseAuth.getInstance().currentUser
+           val sender = CurrentUser!!.getDisplayName()
+           val contact = cellForRow.ContactName.text
+           var ref = FirebaseDatabase.getInstance().getReference("/mensajes/${sender}:$contact")
+//           val key = ref.push().key
+           val key = "key"
+           val message = "maria quiere que cambie el mensaje"
+           ref.child(key!!).child("sender").setValue("$sender")
+           ref.child(key!!).child("message").setValue(message)
+           ref = FirebaseDatabase.getInstance().getReference("/mensajes/${contact}:$sender")
+           ref.push()
+           ref.child(key!!).child("sender").setValue("$contact")
+           ref.child(key!!).child("message").setValue(message)
+
+
+       }
 
         return CustomViewHolder(cellForRow)
     }
